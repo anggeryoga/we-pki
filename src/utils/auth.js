@@ -1,3 +1,4 @@
+// src/utils/auth.js
 import { supabase } from '../config/supabase.js';
 
 export class AuthManager {
@@ -7,7 +8,7 @@ export class AuthManager {
         email,
         password
       });
-      
+
       if (error) throw error;
       return { success: true, user: data.user };
     } catch (error) {
@@ -27,8 +28,15 @@ export class AuthManager {
 
   static async getCurrentUser() {
     try {
+      const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+
+      if (sessionError || !session) {
+        throw new Error('No active session found');
+      }
+
       const { data: { user }, error } = await supabase.auth.getUser();
       if (error) throw error;
+
       return user;
     } catch (error) {
       console.error('Error getting current user:', error);
@@ -43,7 +51,7 @@ export class AuthManager {
         .select('role')
         .eq('user_id', userId)
         .single();
-      
+
       if (error) throw error;
       return data?.role === 'admin';
     } catch (error) {
