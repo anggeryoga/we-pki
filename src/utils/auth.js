@@ -1,70 +1,36 @@
 // src/utils/auth.js
-import { supabase } from '../config/supabase.js';
+import { createClient } from '@supabase/supabase-js';
 
-export class AuthManager {
-  static async login(email, password) {
-    try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password
-      });
+const supabaseUrl = 'https://vyhwfepblcwczxiupyvz.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ5aHdmZXBibGN3Y3p4aXVweXZ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQxNTQxODUsImV4cCI6MjA2OTczMDE4NX0.GZdJMfZLzZrkPaz_M-EvC5RFrkZqs9vIIkRW17Xtpdw';
 
-      if (error) throw error;
-      return { success: true, user: data.user };
-    } catch (error) {
-      return { success: false, error: error.message };
+export const supabase = createClient(supabaseUrl, supabaseKey);
+
+export const AuthManager = {
+  async login(email, password) {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      throw new Error(error.message);
     }
-  }
 
-  static async logout() {
-    try {
-      const { error } = await supabase.auth.signOut();
-      if (error) throw error;
-      return { success: true };
-    } catch (error) {
-      return { success: false, error: error.message };
+    return data.user;
+  },
+
+  async getCurrentUser() {
+    const { data: { session }, error } = await supabase.auth.getSession();
+
+    if (error || !session) {
+      throw new Error('No active session found');
     }
+
+    return session.user;
+  },
+
+  async logout() {
+    await supabase.auth.signOut();
   }
-
-  static async getCurrentUser() {
-    try {
-      const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-
-      if (sessionError || !session) {
-        throw new Error('No active session found');
-      }
-
-      const { data: { user }, error } = await supabase.auth.getUser();
-      if (error) throw error;
-
-      return user;
-    } catch (error) {
-      console.error('Error getting current user:', error);
-      return null;
-    }
-  }
-
-  static async checkAdminRole(userId) {
-    try {
-      const { data, error } = await supabase
-        .from('admin_users')
-        .select('role')
-        .eq('user_id', userId)
-        .single();
-
-      if (error) throw error;
-      return data?.role === 'admin';
-    } catch (error) {
-      console.error('Error checking admin role:', error);
-      return false;
-    }
-  }
-
-  static redirectToLogin() {
-    window.location.href = '/login.html';
-  }
-
-  static redirectToDashboard() {
-    window.location.href = '/admin.html';
-  }
-}
+};
