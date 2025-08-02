@@ -455,5 +455,44 @@
             }
         };
     </script>
+  <script type="module">
+  import { AuthManager } from './src/utils/auth.js';
+
+  document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const errorDiv = document.getElementById('errorMessage');
+
+    errorDiv.classList.add('hidden');
+
+    const result = await AuthManager.login(email, password);
+
+    if (result.success) {
+      const isAdmin = await AuthManager.checkAdminRole(result.user.id);
+      if (isAdmin) {
+        AuthManager.redirectToDashboard();
+      } else {
+        errorDiv.textContent = 'Akses ditolak. Anda bukan Komandan PKI.';
+        errorDiv.classList.remove('hidden');
+      }
+    } else {
+      errorDiv.textContent = result.error;
+      errorDiv.classList.remove('hidden');
+    }
+  });
+
+  window.addEventListener('load', async () => {
+    const user = await AuthManager.getCurrentUser();
+    if (user) {
+      const isAdmin = await AuthManager.checkAdminRole(user.id);
+      if (isAdmin) {
+        AuthManager.redirectToDashboard();
+      }
+    }
+  });
+</script>
+
 </body>
 </html>
