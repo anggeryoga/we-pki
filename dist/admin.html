@@ -1,32 +1,22 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Favicon -->
-    <link rel="icon" type="image/png"
-        href="https://h2rsi9anqnqbkvkf.public.blob.vercel-storage.com/pngegg-pFGgCbn8dokl6URLE5b4iQ0MwIKfjq.png">
-
     <title>Dashboard Admin - PKI</title>
+        <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://h2rsi9anqnqbkvkf.public.blob.vercel-storage.com/pngegg-pFGgCbn8dokl6URLE5b4iQ0MwIKfjq.png">
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=IBM+Plex+Mono:wght@400;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         @keyframes scanline {
-            0% {
-                background-position: 0 0;
-            }
-
-            100% {
-                background-position: 0 10px;
-            }
+            0% { background-position: 0 0; }
+            100% { background-position: 0 10px; }
         }
-
         .scanlines {
             position: relative;
         }
-
         .scanlines::before {
             content: "";
             position: absolute;
@@ -34,17 +24,17 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom,
-                    transparent 50%,
-                    rgba(0, 0, 0, 0.2) 51%);
+            background: linear-gradient(
+                to bottom,
+                transparent 50%,
+                rgba(0, 0, 0, 0.2) 51%
+            );
             background-size: 100% 4px;
             pointer-events: none;
             animation: scanline 1s linear infinite;
             z-index: 10;
         }
-
-        .terminal-input,
-        .terminal-textarea {
+        .terminal-input, .terminal-textarea {
             background: black;
             border: 2px solid #d62828;
             color: #ffdd57;
@@ -52,32 +42,26 @@
             padding: 0.75rem;
             outline: none;
         }
-
-        .terminal-input:focus,
-        .terminal-textarea:focus {
+        .terminal-input:focus, .terminal-textarea:focus {
             box-shadow: 0 0 0 2px #ffdd57;
         }
-
         .tab-content {
             display: none;
         }
-
         .tab-content.active {
             display: block;
         }
-
         .tab-button.active {
             background-color: #d62828;
             color: black;
         }
     </style>
-    <script type="module" crossorigin src="/assets/admin-CQQOFJsY.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/supabase-B6KWXDKJ.js">
-    <link rel="modulepreload" crossorigin href="/assets/auth-DpkU9CxX.js">
-    <link rel="modulepreload" crossorigin href="/assets/blog-BQU-0sm6.js">
-    <link rel="modulepreload" crossorigin href="/assets/gallery-B041qNqH.js">
+  <script type="module" crossorigin src="/assets/admin-CQQOFJsY.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/supabase-B6KWXDKJ.js">
+  <link rel="modulepreload" crossorigin href="/assets/auth-DpkU9CxX.js">
+  <link rel="modulepreload" crossorigin href="/assets/blog-BQU-0sm6.js">
+  <link rel="modulepreload" crossorigin href="/assets/gallery-B041qNqH.js">
 </head>
-
 <body class="bg-black text-amber-50 font-mono min-h-screen scanlines">
     <!-- Header -->
     <header class="border-b-4 border-red-700 py-4 px-6">
@@ -92,8 +76,7 @@
             </div>
             <div class="flex items-center space-x-4">
                 <span class="font-['IBM_Plex_Mono']" id="userEmail"></span>
-                <button id="logoutBtn"
-                    class="px-4 py-2 bg-red-700 text-black font-bold border border-black hover:border-amber-200 transition">
+                <button id="logoutBtn" class="px-4 py-2 bg-red-700 text-black font-bold border border-black hover:border-amber-200 transition">
                     KELUAR
                 </button>
             </div>
@@ -104,8 +87,7 @@
     <nav class="border-b-2 border-red-700 px-6">
         <div class="container mx-auto">
             <div class="flex space-x-1">
-                <button class="tab-button active px-4 py-2 font-['IBM_Plex_Mono'] border-r border-red-700"
-                    data-tab="articles">
+                <button class="tab-button active px-4 py-2 font-['IBM_Plex_Mono'] border-r border-red-700" data-tab="articles">
                     ARTIKEL
                 </button>
                 <button class="tab-button px-4 py-2 font-['IBM_Plex_Mono'] border-r border-red-700" data-tab="gallery">
@@ -124,8 +106,7 @@
         <div id="articles" class="tab-content active">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-2xl font-bold font-['Press_Start_2P'] text-red-600">MANAJEMEN ARTIKEL</h2>
-                <button id="newArticleBtn"
-                    class="px-6 py-3 bg-red-700 text-black font-bold border-4 border-black hover:border-amber-200 font-['Press_Start_2P'] transition-all">
+                <button id="newArticleBtn" class="px-6 py-3 bg-red-700 text-black font-bold border-4 border-black hover:border-amber-200 font-['Press_Start_2P'] transition-all">
                     + ARTIKEL BARU
                 </button>
             </div>
@@ -170,12 +151,10 @@ Tulis konten artikel menggunakan **Markdown**. Contoh:
                         </label>
                     </div>
                     <div class="flex space-x-4">
-                        <button type="submit"
-                            class="px-6 py-2 bg-red-700 text-black font-bold border border-black hover:border-amber-200 transition">
+                        <button type="submit" class="px-6 py-2 bg-red-700 text-black font-bold border border-black hover:border-amber-200 transition">
                             SIMPAN
                         </button>
-                        <button type="button" id="cancelArticle"
-                            class="px-6 py-2 bg-gray-700 text-white font-bold border border-gray-500 hover:border-amber-200 transition">
+                        <button type="button" id="cancelArticle" class="px-6 py-2 bg-gray-700 text-white font-bold border border-gray-500 hover:border-amber-200 transition">
                             BATAL
                         </button>
                     </div>
@@ -194,8 +173,7 @@ Tulis konten artikel menggunakan **Markdown**. Contoh:
         <div id="gallery" class="tab-content">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-2xl font-bold font-['Press_Start_2P'] text-red-600">MANAJEMEN GALERI</h2>
-                <button id="uploadImageBtn"
-                    class="px-6 py-3 bg-red-700 text-black font-bold border-4 border-black hover:border-amber-200 font-['Press_Start_2P'] transition-all">
+                <button id="uploadImageBtn" class="px-6 py-3 bg-red-700 text-black font-bold border-4 border-black hover:border-amber-200 font-['Press_Start_2P'] transition-all">
                     + UPLOAD GAMBAR
                 </button>
             </div>
@@ -214,16 +192,13 @@ Tulis konten artikel menggunakan **Markdown**. Contoh:
                     </div>
                     <div>
                         <label class="block text-amber-200 mb-2 font-['IBM_Plex_Mono']">Deskripsi:</label>
-                        <textarea id="imageDescription" class="terminal-textarea w-full h-24"
-                            placeholder="Deskripsi singkat tentang kucing ini..."></textarea>
+                        <textarea id="imageDescription" class="terminal-textarea w-full h-24" placeholder="Deskripsi singkat tentang kucing ini..."></textarea>
                     </div>
                     <div class="flex space-x-4">
-                        <button type="submit"
-                            class="px-6 py-2 bg-red-700 text-black font-bold border border-black hover:border-amber-200 transition">
+                        <button type="submit" class="px-6 py-2 bg-red-700 text-black font-bold border border-black hover:border-amber-200 transition">
                             UPLOAD
                         </button>
-                        <button type="button" id="cancelUpload"
-                            class="px-6 py-2 bg-gray-700 text-white font-bold border border-gray-500 hover:border-amber-200 transition">
+                        <button type="button" id="cancelUpload" class="px-6 py-2 bg-gray-700 text-white font-bold border border-gray-500 hover:border-amber-200 transition">
                             BATAL
                         </button>
                     </div>
@@ -271,5 +246,4 @@ Tulis konten artikel menggunakan **Markdown**. Contoh:
 
 
 </body>
-
 </html>
