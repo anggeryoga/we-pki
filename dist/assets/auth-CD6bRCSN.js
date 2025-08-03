@@ -1,1 +1,0 @@
-import{s as o}from"./supabase-B6KWXDKJ.js";const a={async getCurrentUser(){const{data:r,error:e}=await o.auth.getSession();if(e)throw e;if(!r.session)throw new Error("No active session found");return r.session.user},async getUserRole(r){const{data:e,error:s}=await o.from("users").select("role").eq("id",r).single();if(s)throw s;return e.role}};export{a as A};
