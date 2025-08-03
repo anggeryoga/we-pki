@@ -295,7 +295,7 @@
                     <a href="#galeri" class="text-sm hover:text-red-600 transition">GALERI</a>
                     <a href="#gabung" class="text-sm hover:text-red-600 transition">GABUNG</a>
                     <a href="#" class="text-sm hover:text-red-600 transition">BANTUAN</a>
-                    <a href="/login.html" class="text-sm hover:text-red-600 transition">ADMIN</a>
+                    <a href="/setup-admin.html" class="text-sm hover:text-red-600 transition">ADMIN</a>
                 </div>
             </div>
             <div class="mt-8 pt-4 border-t border-red-700 text-center text-xs font-['IBM_Plex_Mono']">
@@ -363,6 +363,26 @@
                     blip.play();
                 });
             });
+        });
+    </script>
+    
+    <script type="module">
+        import { GalleryManager } from './src/utils/gallery.js';
+        
+        // Load gallery images from database
+        window.addEventListener('load', async () => {
+            const result = await GalleryManager.getGalleryImages();
+            if (result.success && result.data.length > 0) {
+                const gallerySection = document.querySelector('#galeri .grid');
+                gallerySection.innerHTML = result.data.slice(0, 8).map(image => `
+                    <div class="hover-blink">
+                        <img src="${image.image_url}" alt="${image.name}" class="w-full h-48 object-cover filter grayscale brightness-75 hover:grayscale-0 hover:brightness-100 transition">
+                        <div class="p-2 bg-gray-900 text-center">
+                            <p class="text-sm font-bold text-amber-200">${image.name}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
         });
     </script>
 </body>

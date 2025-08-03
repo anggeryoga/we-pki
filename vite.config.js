@@ -9,7 +9,8 @@ export default defineConfig({
         main: 'index.html',
         blog: 'blog.html',
         admin: 'admin.html',
-        login: 'login.html'
+        login: 'login.html',
+        setup: 'setup-admin.html'
       }
     }
   },

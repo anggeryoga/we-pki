@@ -118,7 +118,19 @@
                     </div>
                     <div>
                         <label class="block text-amber-200 mb-2 font-['IBM_Plex_Mono']">Konten (Markdown):</label>
-                        <textarea id="articleContent" class="terminal-textarea w-full h-64" required></textarea>
+                        <textarea id="articleContent" class="terminal-textarea w-full h-64" required placeholder="# Judul Artikel
+
+Tulis konten artikel menggunakan **Markdown**. Contoh:
+
+## Sub Judul
+- Item list 1
+- Item list 2
+
+> Quote text
+
+**Bold text** dan *italic text*
+
+[Link text](https://example.com)"></textarea>
                     </div>
                     <div>
                         <label class="block text-amber-200 mb-2 font-['IBM_Plex_Mono']">URL Gambar:</label>
@@ -172,7 +184,7 @@
                     </div>
                     <div>
                         <label class="block text-amber-200 mb-2 font-['IBM_Plex_Mono']">Deskripsi:</label>
-                        <textarea id="imageDescription" class="terminal-textarea w-full h-24"></textarea>
+                        <textarea id="imageDescription" class="terminal-textarea w-full h-24" placeholder="Deskripsi singkat tentang kucing ini..."></textarea>
                     </div>
                     <div class="flex space-x-4">
                         <button type="submit" class="px-6 py-2 bg-red-700 text-black font-bold border border-black hover:border-amber-200 transition">
@@ -214,8 +226,8 @@
                                 <div class="text-sm">Total Gambar</div>
                             </div>
                             <div class="bg-red-900 p-4 border border-red-700">
-                                <div class="text-2xl font-bold" id="storageUsed">0 MB</div>
-                                <div class="text-sm">Storage Terpakai</div>
+                                <div class="text-2xl font-bold" id="draftArticles">0</div>
+                                <div class="text-sm">Draft Artikel</div>
                             </div>
                         </div>
                     </div>
@@ -402,11 +414,12 @@
         async function loadStats() {
             const articlesResult = await BlogManager.getAllArticlesForAdmin();
             const galleryResult = await GalleryManager.getGalleryImages();
+            const statsResult = await BlogManager.getArticleStats();
             
-            if (articlesResult.success) {
-                document.getElementById('totalArticles').textContent = articlesResult.data.length;
-                document.getElementById('publishedArticles').textContent = 
-                    articlesResult.data.filter(a => a.published).length;
+            if (statsResult.success) {
+                document.getElementById('totalArticles').textContent = statsResult.stats.total;
+                document.getElementById('publishedArticles').textContent = statsResult.stats.published;
+                document.getElementById('draftArticles').textContent = statsResult.stats.drafts;
             }
             
             if (galleryResult.success) {
@@ -455,44 +468,6 @@
             }
         };
     </script>
-  <script type="module">
-  import { AuthManager } from './src/utils/auth.js';
-
-  document.getElementById('loginForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const errorDiv = document.getElementById('errorMessage');
-
-    errorDiv.classList.add('hidden');
-
-    const result = await AuthManager.login(email, password);
-
-    if (result.success) {
-      const isAdmin = await AuthManager.checkAdminRole(result.user.id);
-      if (isAdmin) {
-        AuthManager.redirectToDashboard();
-      } else {
-        errorDiv.textContent = 'Akses ditolak. Anda bukan Komandan PKI.';
-        errorDiv.classList.remove('hidden');
-      }
-    } else {
-      errorDiv.textContent = result.error;
-      errorDiv.classList.remove('hidden');
-    }
-  });
-
-  window.addEventListener('load', async () => {
-    const user = await AuthManager.getCurrentUser();
-    if (user) {
-      const isAdmin = await AuthManager.checkAdminRole(user.id);
-      if (isAdmin) {
-        AuthManager.redirectToDashboard();
-      }
-    }
-  });
-</script>
 
 </body>
 </html>
