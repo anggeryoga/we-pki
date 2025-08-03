@@ -361,24 +361,25 @@
                 }
             }, 100);
             
-            // Easter egg - 8-bit music
+            // Easter egg - Music playback
             const easterEgg = document.getElementById('easterEgg');
-            let audio = new Audio();
+            let audio = new Audio('https://raw.githubusercontent.com/anggeryoga/portoku.web.id/main/y2mate.gg--Hitler-Ranting.mp3');
+            audio.loop = true; // Musik akan mengulang
             let isPlaying = false;
             
             easterEgg.addEventListener('click', function() {
                 if (!isPlaying) {
-                    // This is a base64 encoded short 8-bit music clip
-                    audio.src = 'https://raw.githubusercontent.com/anggeryoga/portoku.web.id/main/y2mate.gg--Hitler-Ranting.mp3
-';
-                    audio.loop = true;
-                    audio.play();
-                    isPlaying = true;
-                    easterEgg.textContent = '🔇';
+                    audio.play().then(() => {
+                        isPlaying = true;
+                        easterEgg.textContent = '🔇'; // Ganti ikon menjadi mute
+                    }).catch(error => {
+                        console.error("Gagal memutar audio:", error);
+                        alert("Browser Anda mungkin memblokir autoplay. Silakan izinkan pemutaran media.");
+                    });
                 } else {
                     audio.pause();
                     isPlaying = false;
-                    easterEgg.textContent = '🎵';
+                    easterEgg.textContent = '🎵'; // Ganti ikon kembali ke musik
                 }
             });
             
@@ -386,10 +387,37 @@
             const buttons = document.querySelectorAll('button, a[href]');
             buttons.forEach(button => {
                 button.addEventListener('click', function() {
-                    const blip = new Audio();
-                    blip.src = 'dist/assets/music.mp3'; // Short blip sound
-                    blip.volume = 0.2;
-                    blip.play();
+                    // Cek apakah bukan tombol easter egg untuk menghindari double sound
+                    if (button.id !== 'easterEgg') { 
+                        // Jika kamu punya file sound blip lokal, gunakan ini:
+                        // const blip = new Audio('path/to/your/blip.mp3'); 
+                        // blip.volume = 0.2;
+                        // blip.play();
+
+                        // Atau, jika tidak ada file blip, kita bisa membuat sound sederhana (klik ringan)
+                        // Menggunakan Web Audio API untuk sound effect sederhana
+                        try {
+                            const AudioContext = window.AudioContext || window.webkitAudioContext;
+                            const audioCtx = new AudioContext();
+                            const oscillator = audioCtx.createOscillator();
+                            const gainNode = audioCtx.createGain();
+
+                            oscillator.connect(gainNode);
+                            gainNode.connect(audioCtx.destination);
+
+                            oscillator.type = 'sine'; // Gelombang sinus
+                            oscillator.frequency.setValueAtTime(440, audioCtx.currentTime); // Frekuensi 440 Hz (nada A)
+                            gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime); // Volume awal 0.1
+
+                            oscillator.start();
+                            gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.1); // Fade out cepat
+                            oscillator.stop(audioCtx.currentTime + 0.1); // Hentikan setelah 0.1 detik
+                        } catch (e) {
+                            console.warn("Web Audio API tidak didukung atau ada kesalahan:", e);
+                            // Fallback jika Web Audio API tidak tersedia atau gagal
+                            // Misalnya, bisa play sound effect dari tag <audio> tersembunyi jika ada
+                        }
+                    }
                 });
             });
         });
