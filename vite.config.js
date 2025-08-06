@@ -8,6 +8,7 @@ export default defineConfig({
       input: {
         main: 'index.html',
         blog: 'blog.html',
+        article: 'article.html',
         admin: 'admin.html',
         login: 'login.html',
         setup: 'setup-admin.html'
