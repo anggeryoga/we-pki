@@ -270,22 +270,22 @@
                 FORMULIR ANGGOTA
             </h2>
             <div class="bg-black p-6 border-2 border-red-700">
-                <form class="space-y-6 font-['IBM_Plex_Mono']">
+                <form id="memberForm" class="space-y-6 font-['IBM_Plex_Mono']">
                     <div>
                         <label class="block text-amber-200 mb-2">> Nama:</label>
-                        <input type="text" class="terminal-input w-full" placeholder="NAMA LENGKAP ANDA">
+                        <input type="text" id="memberName" class="terminal-input w-full" placeholder="NAMA LENGKAP ANDA" required>
                     </div>
                     <div>
                         <label class="block text-amber-200 mb-2">> Wilayah:</label>
-                        <input type="text" class="terminal-input w-full" placeholder="PROVINSI/KOTA">
+                        <input type="text" id="memberRegion" class="terminal-input w-full" placeholder="PROVINSI/KOTA" required>
                     </div>
                     <div>
                         <label class="block text-amber-200 mb-2">> Kucing Kamu:</label>
-                        <input type="text" class="terminal-input w-full" placeholder="NAMA & RAS KUCING">
+                        <input type="text" id="memberCat" class="terminal-input w-full" placeholder="NAMA & RAS KUCING" required>
                     </div>
                     <div>
                         <label class="block text-amber-200 mb-2">> Alasan Bergabung:</label>
-                        <textarea class="terminal-input w-full h-24" placeholder="JELASKAN MENGAPA ANDA INGIN BERGABUNG DENGAN PKI"></textarea>
+                        <textarea id="memberReason" class="terminal-input w-full h-24" placeholder="JELASKAN MENGAPA ANDA INGIN BERGABUNG DENGAN PKI" required></textarea>
                     </div>
                     <div class="pt-4">
                         <button type="submit" class="blip-button px-8 py-3 bg-red-700 text-black font-bold text-xl border-4 border-black hover:border-amber-200 font-['Press_Start_2P'] transition-all">
@@ -293,6 +293,10 @@
                         </button>
                     </div>
                 </form>
+                
+                <div id="formMessage" class="mt-4 p-3 border hidden">
+                    <!-- Success/Error messages will appear here -->
+                </div>
             </div>
         </div>
     </section>
@@ -421,6 +425,7 @@
     
     <script type="module">
         import { GalleryManager } from './src/utils/gallery.js';
+        import { MemberManager } from './src/utils/members.js';
         
         // Load gallery images from database
         window.addEventListener('load', async () => {
@@ -435,6 +440,39 @@
                         </div>
                     </div>
                 `).join('');
+            }
+        });
+        
+        // Handle member form submission
+        document.getElementById('memberForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('memberName').value,
+                region: document.getElementById('memberRegion').value,
+                cat_info: document.getElementById('memberCat').value,
+                reason: document.getElementById('memberReason').value
+            };
+            
+            const messageDiv = document.getElementById('formMessage');
+            
+            try {
+                const result = await MemberManager.submitMemberForm(formData);
+                
+                if (result.success) {
+                    messageDiv.className = 'mt-4 p-3 border border-green-600 bg-green-900 text-green-200 font-[\'IBM_Plex_Mono\']';
+                    messageDiv.textContent = 'Formulir berhasil dikirim! Revolusi Meong akan segera menghubungi Anda.';
+                    messageDiv.classList.remove('hidden');
+                    
+                    // Reset form
+                    document.getElementById('memberForm').reset();
+                } else {
+                    throw new Error(result.error);
+                }
+            } catch (error) {
+                messageDiv.className = 'mt-4 p-3 border border-red-600 bg-red-900 text-red-200 font-[\'IBM_Plex_Mono\']';
+                messageDiv.textContent = 'Terjadi kesalahan: ' + error.message;
+                messageDiv.classList.remove('hidden');
             }
         });
     </script>

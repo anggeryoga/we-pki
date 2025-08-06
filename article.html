@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="articleTitle">Artikel - PKI | Pecinta Kucing Indonesia</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png"
+        href="https://h2rsi9anqnqbkvkf.public.blob.vercel-storage.com/pngegg-pFGgCbn8dokl6URLE5b4iQ0MwIKfjq.png">
+
+    <meta name="description" id="articleDescription" content="Baca artikel dari PKI - Pecinta Kucing Indonesia. Satu Meong, Satu Suara.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=IBM+Plex+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        @keyframes scanline {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 0 10px;
+            }
+        }
+
+        .scanlines {
+            position: relative;
+        }
+
+        .scanlines::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom,
+                    transparent 50%,
+                    rgba(0, 0, 0, 0.2) 51%);
+            background-size: 100% 4px;
+            pointer-events: none;
+            animation: scanline 1s linear infinite;
+            z-index: 10;
+        }
+
+        .crt-effect {
+            position: relative;
+        }
+
+        .crt-effect::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center,
+                    rgba(214, 40, 40, 0.1) 0%,
+                    rgba(0, 0, 0, 0.9) 100%);
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .grain-effect {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
+        }
+
+        .article-content {
+            line-height: 1.8;
+        }
+
+        .article-content h1 {
+            @apply text-3xl font-bold mb-6 text-red-600;
+            font-family: 'Press Start 2P', monospace;
+            line-height: 1.4;
+        }
+
+        .article-content h2 {
+            @apply text-2xl font-bold mb-4 text-red-500;
+            font-family: 'Press Start 2P', monospace;
+            line-height: 1.4;
+        }
+
+        .article-content h3 {
+            @apply text-xl font-bold mb-3 text-amber-200;
+            font-family: 'Press Start 2P', monospace;
+            line-height: 1.4;
+        }
+
+        .article-content p {
+            @apply mb-6 leading-relaxed text-amber-50;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        .article-content ul, .article-content ol {
+            @apply list-inside mb-6 space-y-2;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        .article-content ul {
+            @apply list-disc;
+        }
+
+        .article-content ol {
+            @apply list-decimal;
+        }
+
+        .article-content li {
+            @apply text-amber-100 leading-relaxed;
+        }
+
+        .article-content blockquote {
+            @apply border-l-4 border-red-700 pl-6 my-6 italic text-amber-200 bg-gray-900 p-4 rounded-r;
+        }
+
+        .article-content code {
+            @apply bg-red-900 text-amber-200 px-2 py-1 rounded;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        .article-content pre {
+            @apply bg-gray-900 border border-red-700 p-4 rounded mb-6 overflow-x-auto;
+        }
+
+        .article-content pre code {
+            @apply bg-transparent p-0;
+        }
+
+        .article-content a {
+            @apply text-red-400 hover:text-red-300 underline transition-colors;
+        }
+
+        .article-content strong {
+            @apply font-bold text-amber-200;
+        }
+
+        .article-content em {
+            @apply italic text-amber-300;
+        }
+
+        .article-content img {
+            @apply rounded border-2 border-red-700 my-6;
+        }
+    </style>
+</head>
+
+<body class="bg-black text-amber-50 font-mono min-h-screen crt-effect scanlines grain-effect">
+    <!-- Header -->
+    <header class="border-b-4 border-red-700 py-4 px-6">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center mb-4 md:mb-0">
+                <div class="bg-red-700 w-12 h-12 flex items-center justify-center mr-4">
+                    <span class="text-3xl">🐾</span>
+                </div>
+                <h1 class="text-2xl md:text-3xl font-bold font-['Press_Start_2P']">
+                    <span class="text-red-600">PKI</span> - BLOG REVOLUSI
+                </h1>
+            </div>
+            <nav class="flex space-x-1 md:space-x-4">
+                <a href="/"
+                    class="px-2 py-1 bg-black text-amber-50 border border-red-700 hover:bg-red-700 hover:text-black transition">BERANDA</a>
+                <a href="/blog.html"
+                    class="px-2 py-1 bg-black text-amber-50 border border-red-700 hover:bg-red-700 hover:text-black transition">BLOG</a>
+                <a href="/#galeri"
+                    class="px-2 py-1 bg-black text-amber-50 border border-red-700 hover:bg-red-700 hover:text-black transition">GALERI</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Article Content -->
+    <main class="py-8 px-6">
+        <div class="container mx-auto max-w-4xl">
+            <!-- Back Button -->
+            <div class="mb-6">
+                <a href="/blog.html" class="inline-flex items-center px-4 py-2 bg-red-700 text-black font-bold border border-black hover:border-amber-200 transition font-['IBM_Plex_Mono']">
+                    ← KEMBALI KE BLOG
+                </a>
+            </div>
+
+            <!-- Article -->
+            <article id="articleContainer" class="bg-black border-2 border-red-700 p-8">
+                <!-- Loading State -->
+                <div id="loadingState" class="text-center py-12">
+                    <div class="text-6xl mb-4">🐾</div>
+                    <h2 class="text-2xl font-bold mb-2 font-['Press_Start_2P'] text-red-600">
+                        MEMUAT ARTIKEL...
+                    </h2>
+                    <p class="font-['IBM_Plex_Mono'] text-amber-200">
+                        Sedang mengambil data revolusi...
+                    </p>
+                </div>
+
+                <!-- Article Content -->
+                <div id="articleContent" class="hidden">
+                    <!-- Content will be loaded here -->
+                </div>
+
+                <!-- Error State -->
+                <div id="errorState" class="text-center py-12 hidden">
+                    <div class="text-6xl mb-4">❌</div>
+                    <h2 class="text-2xl font-bold mb-2 font-['Press_Start_2P'] text-red-600">
+                        ARTIKEL TIDAK DITEMUKAN
+                    </h2>
+                    <p class="font-['IBM_Plex_Mono'] text-amber-200 mb-6">
+                        Artikel yang Anda cari tidak ada atau telah dihapus.
+                    </p>
+                    <a href="/blog.html" class="px-6 py-3 bg-red-700 text-black font-bold border border-black hover:border-amber-200 transition font-['Press_Start_2P']">
+                        KEMBALI KE BLOG
+                    </a>
+                </div>
+            </article>
+
+            <!-- Share Section -->
+            <div id="shareSection" class="mt-8 bg-black border-2 border-red-700 p-6 hidden">
+                <h3 class="text-lg font-bold mb-4 font-['Press_Start_2P'] text-red-600">
+                    BAGIKAN REVOLUSI INI:
+                </h3>
+                <div class="flex flex-wrap gap-4">
+                    <button id="shareTwitter" class="px-4 py-2 bg-blue-600 text-white font-bold hover:bg-blue-700 transition font-['IBM_Plex_Mono']">
+                        📱 TWITTER
+                    </button>
+                    <button id="shareFacebook" class="px-4 py-2 bg-blue-800 text-white font-bold hover:bg-blue-900 transition font-['IBM_Plex_Mono']">
+                        📘 FACEBOOK
+                    </button>
+                    <button id="copyLink" class="px-4 py-2 bg-gray-700 text-white font-bold hover:bg-gray-800 transition font-['IBM_Plex_Mono']">
+                        🔗 COPY LINK
+                    </button>
+                </div>
+            </div>
+
+            <!-- Related Articles -->
+            <div id="relatedArticles" class="mt-8 bg-black border-2 border-red-700 p-6 hidden">
+                <h3 class="text-lg font-bold mb-4 font-['Press_Start_2P'] text-red-600">
+                    ARTIKEL LAINNYA:
+                </h3>
+                <div id="relatedList" class="space-y-4">
+                    <!-- Related articles will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 px-6 bg-black border-t-4 border-red-700">
+        <div class="container mx-auto max-w-6xl">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-6 md:mb-0">
+                    <div class="bg-red-700 w-10 h-10 flex items-center justify-center mr-3">
+                        <span class="text-2xl">🐾</span>
+                    </div>
+                    <div>
+                        <div class="text-xl font-bold font-['Press_Start_2P']">
+                            PKI - PECINTA KUCING INDONESIA
+                        </div>
+                        <div class="text-sm font-['IBM_Plex_Mono']">
+                            "Dari Meong, Oleh Meong, Untuk Meong."
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center md:text-left">
+                    <a href="/" class="text-sm hover:text-red-600 transition">BERANDA</a>
+                    <a href="/blog.html" class="text-sm hover:text-red-600 transition">BLOG</a>
+                    <a href="/#galeri" class="text-sm hover:text-red-600 transition">GALERI</a>
+                    <a href="/login.html" class="text-sm hover:text-red-600 transition">ADMIN</a>
+                </div>
+            </div>
+            <div class="mt-8 pt-4 border-t border-red-700 text-center text-xs font-['IBM_Plex_Mono']">
+                © 1983-2023 PKI - Pecinta Kucing Indonesia. Semua hak dilindungi oleh kucing.
+            </div>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { BlogManager } from './src/utils/blog.js';
+        import { SEOManager } from './src/components/seo.js';
+
+        let currentArticle = null;
+
+        // Load article on page load
+        window.addEventListener('load', () => {
+            loadArticle();
+        });
+
+        async function loadArticle() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const slug = urlParams.get('slug');
+            
+            if (!slug) {
+                showError();
+                return;
+            }
+
+            try {
+                const result = await BlogManager.getArticleBySlug(slug);
+                
+                if (result.success) {
+                    currentArticle = result.data;
+                    displayArticle(currentArticle);
+                    loadRelatedArticles();
+                } else {
+                    showError();
+                }
+            } catch (error) {
+                console.error('Error loading article:', error);
+                showError();
+            }
+        }
+
+        function displayArticle(article) {
+            // Update SEO
+            SEOManager.updatePageMeta({
+                title: `${article.title} - PKI Blog`,
+                description: article.excerpt,
+                image: article.featured_image,
+                url: `${window.location.origin}/article.html?slug=${article.slug}`,
+                type: 'article',
+                publishedDate: article.created_at,
+                modifiedDate: article.updated_at
+            });
+
+            // Update page title
+            document.getElementById('articleTitle').textContent = `${article.title} - PKI Blog`;
+            document.getElementById('articleDescription').setAttribute('content', article.excerpt);
+
+            // Display article content
+            document.getElementById('articleContent').innerHTML = `
+                <header class="mb-8">
+                    <h1 class="text-3xl md:text-4xl font-bold mb-4 font-['Press_Start_2P'] text-red-600 leading-tight">
+                        ${article.title}
+                    </h1>
+                    <div class="flex flex-wrap items-center gap-4 text-sm text-amber-200 font-['IBM_Plex_Mono'] mb-6">
+                        <span class="flex items-center">
+                            📅 ${new Date(article.created_at).toLocaleDateString('id-ID', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                            })}
+                        </span>
+                        <span class="flex items-center">
+                            👁️ Artikel PKI
+                        </span>
+                        <span class="flex items-center">
+                            🏷️ Revolusi Meong
+                        </span>
+                    </div>
+                    ${article.featured_image ? `
+                        <img src="${article.featured_image}" alt="${article.title}" class="w-full h-64 md:h-96 object-cover mb-8 border-2 border-red-700 rounded">
+                    ` : ''}
+                    <div class="bg-red-900 p-4 border-l-4 border-red-600 mb-8">
+                        <p class="text-amber-200 font-['IBM_Plex_Mono'] italic">
+                            ${article.excerpt}
+                        </p>
+                    </div>
+                </header>
+                <div class="article-content">
+                    ${article.content_html}
+                </div>
+            `;
+
+            // Show content and hide loading
+            document.getElementById('loadingState').classList.add('hidden');
+            document.getElementById('articleContent').classList.remove('hidden');
+            document.getElementById('shareSection').classList.remove('hidden');
+
+            // Setup share buttons
+            setupShareButtons(article);
+        }
+
+        function setupShareButtons(article) {
+            const url = `${window.location.origin}/article.html?slug=${article.slug}`;
+            const text = `${article.title} - PKI Blog`;
+
+            document.getElementById('shareTwitter').addEventListener('click', () => {
+                const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+                window.open(shareUrl, '_blank', 'width=600,height=400');
+            });
+
+            document.getElementById('shareFacebook').addEventListener('click', () => {
+                const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+                window.open(shareUrl, '_blank', 'width=600,height=400');
+            });
+
+            document.getElementById('copyLink').addEventListener('click', () => {
+                navigator.clipboard.writeText(url).then(() => {
+                    const button = document.getElementById('copyLink');
+                    const originalText = button.textContent;
+                    button.textContent = '✅ TERSALIN!';
+                    setTimeout(() => {
+                        button.textContent = originalText;
+                    }, 2000);
+                });
+            });
+        }
+
+        async function loadRelatedArticles() {
+            try {
+                const result = await BlogManager.getArticles(4, 0);
+                if (result.success && result.data.length > 0) {
+                    const relatedArticles = result.data.filter(article => 
+                        article.slug !== currentArticle.slug
+                    ).slice(0, 3);
+
+                    if (relatedArticles.length > 0) {
+                        document.getElementById('relatedList').innerHTML = relatedArticles.map(article => `
+                            <a href="/article.html?slug=${article.slug}" class="block p-4 border border-red-700 hover:bg-red-900 transition">
+                                <div class="flex items-start space-x-4">
+                                    ${article.featured_image ? `
+                                        <img src="${article.featured_image}" alt="${article.title}" class="w-16 h-16 object-cover border border-red-700">
+                                    ` : `
+                                        <div class="w-16 h-16 bg-red-900 flex items-center justify-center border border-red-700">
+                                            <span class="text-2xl">🐾</span>
+                                        </div>
+                                    `}
+                                    <div class="flex-1">
+                                        <h4 class="font-bold text-amber-200 mb-1 font-['IBM_Plex_Mono']">
+                                            ${article.title}
+                                        </h4>
+                                        <p class="text-sm text-gray-400 font-['IBM_Plex_Mono']">
+                                            ${article.excerpt.substring(0, 100)}...
+                                        </p>
+                                    </div>
+                                </div>
+                            </a>
+                        `).join('');
+                        
+                        document.getElementById('relatedArticles').classList.remove('hidden');
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading related articles:', error);
+            }
+        }
+
+        function showError() {
+            document.getElementById('loadingState').classList.add('hidden');
+            document.getElementById('errorState').classList.remove('hidden');
+        }
+    </script>
+</body>
+
+</html>
