@@ -115,9 +115,9 @@
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
         }
     </style>
-  <script type="module" crossorigin src="/assets/main-BIG929Zf.js"></script>
+  <script type="module" crossorigin src="/assets/main-iKEfJKiY.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/supabase-B6KWXDKJ.js">
-  <link rel="modulepreload" crossorigin href="/assets/gallery-B041qNqH.js">
+  <link rel="modulepreload" crossorigin href="/assets/members-DHMXKi-M.js">
 </head>
 <body class="bg-black text-amber-50 font-mono min-h-screen scanlines grain-effect">
     <div id="loading" class="fixed inset-0 bg-black z-50 flex flex-col items-center justify-center">
@@ -273,22 +273,22 @@
                 FORMULIR ANGGOTA
             </h2>
             <div class="bg-black p-6 border-2 border-red-700">
-                <form class="space-y-6 font-['IBM_Plex_Mono']">
+                <form id="memberForm" class="space-y-6 font-['IBM_Plex_Mono']">
                     <div>
                         <label class="block text-amber-200 mb-2">> Nama:</label>
-                        <input type="text" class="terminal-input w-full" placeholder="NAMA LENGKAP ANDA">
+                        <input type="text" id="memberName" class="terminal-input w-full" placeholder="NAMA LENGKAP ANDA" required>
                     </div>
                     <div>
                         <label class="block text-amber-200 mb-2">> Wilayah:</label>
-                        <input type="text" class="terminal-input w-full" placeholder="PROVINSI/KOTA">
+                        <input type="text" id="memberRegion" class="terminal-input w-full" placeholder="PROVINSI/KOTA" required>
                     </div>
                     <div>
                         <label class="block text-amber-200 mb-2">> Kucing Kamu:</label>
-                        <input type="text" class="terminal-input w-full" placeholder="NAMA & RAS KUCING">
+                        <input type="text" id="memberCat" class="terminal-input w-full" placeholder="NAMA & RAS KUCING" required>
                     </div>
                     <div>
                         <label class="block text-amber-200 mb-2">> Alasan Bergabung:</label>
-                        <textarea class="terminal-input w-full h-24" placeholder="JELASKAN MENGAPA ANDA INGIN BERGABUNG DENGAN PKI"></textarea>
+                        <textarea id="memberReason" class="terminal-input w-full h-24" placeholder="JELASKAN MENGAPA ANDA INGIN BERGABUNG DENGAN PKI" required></textarea>
                     </div>
                     <div class="pt-4">
                         <button type="submit" class="blip-button px-8 py-3 bg-red-700 text-black font-bold text-xl border-4 border-black hover:border-amber-200 font-['Press_Start_2P'] transition-all">
@@ -296,6 +296,10 @@
                         </button>
                     </div>
                 </form>
+                
+                <div id="formMessage" class="mt-4 p-3 border hidden">
+                    <!-- Success/Error messages will appear here -->
+                </div>
             </div>
         </div>
     </section>

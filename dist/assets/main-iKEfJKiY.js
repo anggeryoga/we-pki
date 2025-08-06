@@ -1,0 +1,8 @@
+import"./supabase-B6KWXDKJ.js";import{G as n,M as s}from"./members-DHMXKi-M.js";window.addEventListener("load",async()=>{const t=await n.getGalleryImages();if(t.success&&t.data.length>0){const a=document.querySelector("#galeri .grid");a.innerHTML=t.data.slice(0,8).map(e=>`
+                    <div class="hover-blink">
+                        <img src="${e.image_url}" alt="${e.name}" class="w-full h-48 object-cover filter grayscale brightness-75 hover:grayscale-0 hover:brightness-100 transition">
+                        <div class="p-2 bg-gray-900 text-center">
+                            <p class="text-sm font-bold text-amber-200">${e.name}</p>
+                        </div>
+                    </div>
+                `).join("")}});document.getElementById("memberForm").addEventListener("submit",async t=>{t.preventDefault();const a={name:document.getElementById("memberName").value,region:document.getElementById("memberRegion").value,cat_info:document.getElementById("memberCat").value,reason:document.getElementById("memberReason").value},e=document.getElementById("formMessage");try{const r=await s.submitMemberForm(a);if(r.success)e.className="mt-4 p-3 border border-green-600 bg-green-900 text-green-200 font-['IBM_Plex_Mono']",e.textContent="Formulir berhasil dikirim! Revolusi Meong akan segera menghubungi Anda.",e.classList.remove("hidden"),document.getElementById("memberForm").reset();else throw new Error(r.error)}catch(r){e.className="mt-4 p-3 border border-red-600 bg-red-900 text-red-200 font-['IBM_Plex_Mono']",e.textContent="Terjadi kesalahan: "+r.message,e.classList.remove("hidden")}});
